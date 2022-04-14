@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My-Web</title>
+    <title>Portfolio</title>
 
     <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -297,11 +297,11 @@
     <section class="contact" id="contact">
       <h1 class="heading"><span>contact</span> me</h1>
 
-      <form action="">
-        <input type="text" placeholder="your name" class="box">
-        <input type="email" placeholder="your email" class="box">
-        <input type="text" placeholder="subject" class="box">
-        <textarea name="" class="box" placeholder="your message" id="" cols="30" rows="10"></textarea>
+      <form action="" onsubmit="sendMessage(event)">
+        <input name="name" type="text" placeholder="your name" class="box">
+        <input name="email" type="email" placeholder="your email" class="box">
+        <input name="phone" type="number" placeholder="your number" class="box">
+        <textarea name="message" name="" class="box" placeholder="your message" id="" cols="30" rows="10"></textarea>
         <input type="submit" value="send message" class="btn">
       </form>
     </section>
@@ -321,5 +321,40 @@
 
 <iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}" style="display: none;">
 </div>
+
+   <!-- backend js programm start-->
+<script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"
+      integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      async function sendMessage(e) {
+        e.preventDefault();
+
+        try {
+          let formData = new FormData(e.target);
+          let data = {};
+          for (let [key, value] of formData) {
+            data[key] = value;
+          }
+          let response = await axios.post(
+            "https://622c306c087e0e041e0539e6.mockapi.io/User-messages",
+            data,
+          );
+
+          if (response.status === 201) {
+            alert("Thank You so much for messaging me. your love for me...");
+            e.target.reset();
+          }
+        } catch (error) {
+          alert("Something went wrong");
+        }
+      }
+      </script>
+    <!-- backend js programm end-->
+    
 </body>
 </html>
+
